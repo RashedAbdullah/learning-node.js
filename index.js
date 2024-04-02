@@ -5,6 +5,11 @@
 
 // console.log(module);
 
-const names = require("./index2");
+// const names = require("./index2");
 
-console.log(names);
+// console.log(names);
+
+
+
+
+
