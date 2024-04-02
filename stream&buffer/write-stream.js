@@ -10,3 +10,4 @@ const writeStream = fs.createWriteStream(`${__dirname}/stream-write.txt`);
 
 // Same work:
 readStream.pipe(writeStream);
+ 
