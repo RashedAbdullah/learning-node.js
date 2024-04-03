@@ -7,7 +7,7 @@ Date: 3/4/24
 
 // Dependencies:
 const http = require("http");
-const url = require("url");
+const { handleReqRes } = require("./helpers/handleReqRes");
 
 // Module scaffolding
 const app = {};
@@ -26,21 +26,7 @@ app.createServer = () => {
 };
 
 //Handle Request ans response
-app.handleReqRes = (req, res) => {
-  // handle request
-  const parsedUrl = url.parse(req.url, true);
-  const path = parsedUrl.pathname;
-  const trimmedPath = path.replace(/^\/+|\/+$/g, "");
-  const method = req.method.toLowerCase();
-  const queryStrings = parsedUrl.query;
-  const headers = req.headers;
-  console.log(headers);
-  // handle response
-  res.end(`{
-    name: "Rashed Abdullah",
-    Age: 23
-}`);
-};
+app.handleReqRes = handleReqRes;
 
 // Starting Server:
 app.createServer();
