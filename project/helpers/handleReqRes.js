@@ -1,5 +1,9 @@
 const url = require("url");
 const { StringDecoder } = require("string_decoder");
+const routes = require("../routes");
+const {
+  notFoundHandler,
+} = require("../handlers/routeHandlers/notFoundHandlers");
 
 const handler = {};
 handler.handleReqRes = (req, res) => {
@@ -12,6 +16,11 @@ handler.handleReqRes = (req, res) => {
 
   const decoder = new StringDecoder("utf-8");
   let realData = "";
+
+  const chosenHandler = routes[trimmedPath]
+    ? routes[trimmedPath]
+    : notFoundHandler;
+
   req.on("data", (Buffer) => {
     realData += decoder.write(Buffer);
   });
