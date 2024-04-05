@@ -1,5 +1,8 @@
 const handler = {};
-handler.sampleHandler = () => {
-  console.log("Sample");
+handler.sampleHandler = (reqPoperties, cb) => {
+  console.log(reqPoperties);
+  cb(200, {
+    message: "This is sample response",
+  });
 };
 module.exports = handler;

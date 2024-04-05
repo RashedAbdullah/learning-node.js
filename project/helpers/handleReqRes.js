@@ -14,6 +14,15 @@ handler.handleReqRes = (req, res) => {
   const queryStrings = parsedUrl.query;
   const headers = req.headers;
 
+  const requestPoperties = {
+    parsedUrl,
+    path,
+    trimmedPath,
+    method,
+    queryStrings,
+    headers,
+  };
+
   const decoder = new StringDecoder("utf-8");
   let realData = "";
 
@@ -21,6 +30,15 @@ handler.handleReqRes = (req, res) => {
     ? routes[trimmedPath]
     : notFoundHandler;
 
+  chosenHandler(requestPoperties, (statusCode, payload) => {
+    statusCode = typeof statusCode === "number" ? statusCode : 500;
+    payload = typeof payload === "object" ? payload : {};
+    const payloadString = JSON.stringify(payload);
+
+    // Response:
+    res.writeHead(statusCode);
+    res.end(payloadString);
+  });
   req.on("data", (Buffer) => {
     realData += decoder.write(Buffer);
   });
