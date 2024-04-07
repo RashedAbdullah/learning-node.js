@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "dev": "nodemon ./handle-error.js",
+    "dev": "nodemon ./upload-file.js",
     "production": "NODE_ENV=production nodemon handle-error.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.9",
     "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
     "nodemon": "^3.1.0"
   }
 }
