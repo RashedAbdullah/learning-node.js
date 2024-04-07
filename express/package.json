@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon ./middleware.js"
+    "dev": "nodemon ./handle-error.js",
+    "production": "NODE_ENV=production nodemon handle-error.js"
   },
   "dependencies": {
     "cookie-parser": "^1.4.6",
