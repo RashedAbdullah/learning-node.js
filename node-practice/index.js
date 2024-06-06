@@ -43,19 +43,38 @@
 // fs.mkdirSync("test-folder");
 // console.log(os.cpus().length);
 
-const http = require("http");
+// const http = require("http");
+// const url = require("url");
 
-const server = http.createServer((req, res) => {
-  switch (req.url) {
-    case "/":
-      return res.end("This is home page");
-    case "/about":
-      return res.end("This is about page");
-    case "/service":
-      return res.end("This is service page");
-    default:
-      return res.end("Not Matched");
-  }
+// const server = http.createServer((req, res) => {
+//   const parsedUrl = url.parse(req.url);
+// console.log(parsedUrl);
+//   switch (req.url) {
+//     case "/":
+//       return res.end("This is home page");
+//     case "/about":
+//       return res.end("This is about page");
+//     case "/service":
+//       return res.end("This is service page");
+//     default:
+//       return res.end("404 - Not Found");
+//   }
+// });
+
+// server.listen(3000, () => console.log("Server running successfully"));
+
+// const http = require("http");
+const express = require("express");
+const app = express();
+const port = 3000;
+app.get("/", (req, res) => {
+  console.log(req.query);
+  res.send(`Hello ${req.query.name}`);
 });
 
-server.listen(3000, () => console.log("Server running successfully"));
+app.get("/about", (req, res) => {
+  res.send("About Page");
+});
+
+// const server = http.createServer(app);
+app.listen(port, () => console.log("This is port"));
