@@ -1,4 +1,5 @@
 const express = require("express");
+const fs = require("fs");
 const app = express();
 const PORT = 3000;
 
@@ -12,6 +13,16 @@ app.get("/", (req, res) => {
 // JSON Data
 app.get("/api/users", (req, res) => {
   return res.json(users);
+});
+
+app.use(express.urlencoded({ extended: false }));
+
+app.post("/api/users", (req, res) => {
+  const body = req.body;
+  users.push(body);
+  fs.writeFile("./users.json", JSON.stringify(users), (err, data) => {
+    return res.json({ status: "Successfully data inserted..." });
+  });
 });
 
 // HTML Data
@@ -32,11 +43,16 @@ app
     const user = users.find((user) => user.id === id);
     return res.json(user);
   })
-  .post((req, res) => {})
   .patch((req, res) => {
     // Edit:
     return res.json({ status: "Panding..." });
   })
-  .delete((req, res) => {});
+  .delete((req, res) => {
+    const body = req.body;
+    users.pop(body);
+    fs.writeFile("./users.json", JSON.stringify(users), (err, data) => {
+      return res.json({ status: "Successfully data inserted..." });
+    });
+  });
 
 app.listen(PORT, () => console.log(`Server started at PORT: ${PORT}`));
